@@ -1,4 +1,4 @@
-package nl.phanos.testwedstrijdrunner.entity;
+package liveresultsclient.entity;
 // Generated May 8, 2016 11:03:12 AM by Hibernate Tools 3.6.0
 
 

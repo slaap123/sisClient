@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 20, 2016 1:32:32 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="liveresultsclient.entity.Sisresult" table="SISResult" catalog="phanosamsterdam3">
+        <id name="idSisresult" type="int">
+            <column name="idSISResult" />
+            <generator class="identity"></generator>
+        </id>
+        <property name="startN" type="int">
+            <column name="startN" not-null="true" />
+        </property>
+        <property name="headN" type="int">
+            <column name="headN" not-null="true" />
+        </property>
+        <property name="raceName" type="string">
+            <column name="raceName" length="5" not-null="true" />
+        </property>
+        <property name="starterName" type="string">
+            <column name="starterName" length="5" not-null="true" />
+        </property>
+        <many-to-one name="wedstrijden" class="liveresultsclient.entity.Wedstrijden" fetch="select">
+            <column name="wedstridj_id" not-null="true" />
+        </many-to-one>
+        <property name="time" type="timestamp">
+            <column name="time" length="19" not-null="true" />
+        </property>
+        <set cascade="save-update" name="sislanes" table="SISLane" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="SISResult_id" />
+            </key>
+            <one-to-many class="liveresultsclient.entity.Sislane" />
+        </set>
+    </class>
+</hibernate-mapping>

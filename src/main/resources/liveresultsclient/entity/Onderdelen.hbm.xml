@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 8, 2016 11:03:12 AM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="liveresultsclient.entity.Onderdelen" table="Onderdelen" catalog="phanosamsterdam3">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="wedstrijden" class="liveresultsclient.entity.Wedstrijden" fetch="select">
+            <column name="WedstrijdID" not-null="true" />
+        </many-to-one>
+        <property name="filter" type="string">
+            <column name="filter" />
+        </property>
+        <property name="onderdeel" type="string">
+            <column name="Onderdeel" not-null="true" />
+        </property>
+        <property name="opmerking" type="string">
+            <column name="Opmerking" length="1024" not-null="true" />
+        </property>
+        <property name="raceName" type="string">
+            <column name="RaceName" />
+        </property>
+        <property name="displayName" type="string">
+            <column name="displayName" />
+        </property>
+        <property name="categorie" type="string">
+            <column name="Categorie" />
+        </property>
+        <property name="tijd" type="time">
+            <column name="Tijd" length="8" />
+        </property>
+        <property name="externalId" type="java.lang.Integer">
+            <column name="externalID" unique="true" />
+        </property>
+        <set cascade="save-update" name="series" table="serie" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="OnderdeelID" not-null="true" />
+            </key>
+            <one-to-many class="liveresultsclient.entity.Serie" />
+        </set>
+        <set cascade="save-update" name="uitslagens" table="Uitslagen" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="OnderdeelID" not-null="true" />
+            </key>
+            <one-to-many class="liveresultsclient.entity.Uitslagen" />
+        </set>
+        <set cascade="save-update" name="startLijstens" table="StartLijsten" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="OnderdeelID" not-null="true" />
+            </key>
+            <one-to-many class="liveresultsclient.entity.StartLijsten" />
+        </set>
+    </class>
+</hibernate-mapping>

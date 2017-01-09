@@ -1,4 +1,4 @@
-package nl.phanos.testwedstrijdrunner.entity;
+package liveresultsclient.entity;
 // Generated Sep 19, 2016 7:42:13 PM by Hibernate Tools 4.3.1
 
 import java.util.regex.Matcher;

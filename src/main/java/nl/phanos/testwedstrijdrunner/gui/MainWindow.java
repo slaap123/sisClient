@@ -5,10 +5,18 @@
  */
 package nl.phanos.testwedstrijdrunner.gui;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
-import nl.phanos.testwedstrijdrunner.entity.Sisresult;
-import nl.phanos.testwedstrijdrunner.entity.Wedstrijden;
+import liveresultsclient.entity.Sisresult;
+import liveresultsclient.entity.Wedstrijden;
+import nl.phanos.testwedstrijdrunner.utils.HibernateSessionHandler;
+import nl.phanos.testwedstrijdrunner.utils.savingHandler;
 
 /**
  *
@@ -18,11 +26,10 @@ public class MainWindow extends javax.swing.JFrame {
 
     public static MainWindow mainObj;
     public Wedstrijden wedstrijd;
-    public boolean test=true;
-    
-    
+    public boolean test = false;
+
     public javax.swing.JTextPane jTextPane1 = new JTextPane();
-        
+
     private javax.swing.JScrollPane jScrollPane4 = new JScrollPane();
 
     /**
@@ -35,14 +42,41 @@ public class MainWindow extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane4)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING)
         );
-        Sisresult.startHandler();
+        HibernateSessionHandler sessionHandler = HibernateSessionHandler.get();
+        List<Wedstrijden> resultList = sessionHandler.executeHQLQuery("from Wedstrijden");
+        Collections.sort(resultList, new Comparator<Wedstrijden>() {
+                @Override
+                public int compare(Wedstrijden a, Wedstrijden b) {
+                    // -1 - less than, 1 - greater than, 0 - equal, all inversed for descending
+                    return -1*a.getDatum().compareTo(b.getDatum());
+                }
+            });
+        Object[] possibilities = resultList.stream().map(x->x.getNaam()).toArray();
+        String response = (String) JOptionPane.showInputDialog(
+                this,
+                "welke wedstrijd is nu?",
+                "Wedstrijd Dialog",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                possibilities,
+                possibilities[0]);
+
+//If a string was returned, say so.
+        int chosen = Arrays.asList(possibilities).indexOf(response);
+        if(chosen>=0){
+            this.wedstrijd=resultList.get(chosen);
+            Sisresult.startHandler();
+            savingHandler saver=new savingHandler();
+            saver.start();
+        }
+        
     }
 
     /**

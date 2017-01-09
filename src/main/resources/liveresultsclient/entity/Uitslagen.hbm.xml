@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 8, 2016 11:03:12 AM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="liveresultsclient.entity.Uitslagen" table="Uitslagen" catalog="phanosamsterdam3">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="onderdelen" class="liveresultsclient.entity.Onderdelen" fetch="select">
+            <column name="OnderdeelID" not-null="true" />
+        </many-to-one>
+        <many-to-one name="atleten" class="liveresultsclient.entity.Atleten" fetch="select">
+            <column name="AtleetID" not-null="true" />
+        </many-to-one>
+        <property name="serieNummer" type="java.lang.Integer">
+            <column name="SerieNummer" />
+        </property>
+        <property name="baan" type="java.lang.Integer">
+            <column name="Baan" />
+        </property>
+        <property name="categorie" type="string">
+            <column name="Categorie" />
+        </property>
+        <property name="resultaat" type="string">
+            <column name="Resultaat" not-null="true" />
+        </property>
+        <property name="opmerking" type="string">
+            <column name="Opmerking" not-null="true">
+                <comment>wind, artikelnummer dq</comment>
+            </column>
+        </property>
+        <property name="invoerTijd" type="timestamp">
+            <column name="invoerTijd" length="19" not-null="true" />
+        </property>
+        <property name="reactieTijd" type="string">
+            <column name="reactieTijd" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>

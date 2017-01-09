@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 8, 2016 11:03:12 AM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="liveresultsclient.entity.AtletiekNu" table="AtletiekNu" catalog="phanosamsterdam3">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="wedstrijden" class="liveresultsclient.entity.Wedstrijden" fetch="select">
+            <column name="WedstrijdID" not-null="true" />
+        </many-to-one>
+        <property name="nuid" type="int">
+            <column name="nuid" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

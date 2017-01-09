@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 8, 2016 11:03:12 AM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="liveresultsclient.entity.Serie" table="serie" catalog="phanosamsterdam3">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="onderdelen" class="liveresultsclient.entity.Onderdelen" fetch="select">
+            <column name="OnderdeelID" not-null="true" />
+        </many-to-one>
+        <many-to-one name="img" class="liveresultsclient.entity.Img" fetch="select">
+            <column name="finishFOTO" />
+        </many-to-one>
+        <property name="wind" type="string">
+            <column name="wind" length="45" />
+        </property>
+        <property name="serieNummer" type="int">
+            <column name="serieNummer" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

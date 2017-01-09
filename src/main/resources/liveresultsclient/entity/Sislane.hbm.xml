@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 20, 2016 1:32:32 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="liveresultsclient.entity.Sislane" table="SISLane" catalog="phanosamsterdam3">
+        <id name="idSislane" type="int">
+            <column name="idSISLane" />
+            <generator class="identity"></generator>
+        </id>
+        <many-to-one name="sisresult" class="liveresultsclient.entity.Sisresult" fetch="select">
+            <column name="SISResult_id" />
+        </many-to-one>
+        <property name="place" type="java.lang.Integer">
+            <column name="place" />
+        </property>
+        <property name="lane" type="int">
+            <column name="lane" not-null="true" />
+        </property>
+        <property name="signalValue" type="int">
+            <column name="signalValue" not-null="true" />
+        </property>
+        <property name="reactionTime" type="java.lang.Double">
+            <column name="reactionTime" precision="22" scale="0" />
+        </property>
+        <property name="falseStart" type="boolean">
+            <column name="falseStart" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

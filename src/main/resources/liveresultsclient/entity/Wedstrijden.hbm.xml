@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 8, 2016 11:03:12 AM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="liveresultsclient.entity.Wedstrijden" table="Wedstrijden" catalog="phanosamsterdam3">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="naam" type="string">
+            <column name="Naam" not-null="true" />
+        </property>
+        <property name="locatie" type="string">
+            <column name="locatie" />
+        </property>
+        <property name="datum" type="timestamp">
+            <column name="Datum" length="19" />
+        </property>
+        <property name="youtubeLink" type="string">
+            <column name="youtubeLink" />
+        </property>
+        <property name="public_" type="java.lang.Boolean">
+            <column name="Public" />
+        </property>
+        <set cascade="save-update" name="onderdelens" table="Onderdelen" lazy="true" fetch="select">
+            <key>
+                <column name="WedstrijdID" not-null="true" />
+            </key>
+            <one-to-many class="liveresultsclient.entity.Onderdelen" />
+        </set>
+        <set name="atletens" table="Atleten" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="WedstrijdID" not-null="true" />
+            </key>
+            <one-to-many class="liveresultsclient.entity.Atleten" />
+        </set>
+        <set cascade="save-update" name="atletiekNus" table="AtletiekNu" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="WedstrijdID" not-null="true" />
+            </key>
+            <one-to-many class="liveresultsclient.entity.AtletiekNu" />
+        </set>
+        <set cascade="save-update" name="sisresults" table="SISResult" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="wedstridj_id" not-null="true" />
+            </key>
+            <one-to-many class="liveresultsclient.entity.Sisresult" />
+        </set>
+    </class>
+</hibernate-mapping>
