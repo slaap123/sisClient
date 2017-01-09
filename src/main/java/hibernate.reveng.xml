@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="phanosamsterdam3"/>
+  <table-filter match-name="IMG"/>
+  <table-filter match-name="StartLijsten"/>
+  <table-filter match-name="Wedstrijden"/>
+  <table-filter match-name="Onderdelen"/>
+  <table-filter match-name="AtletiekNu"/>
+  <table-filter match-name="SISLane"/>
+  <table-filter match-name="serie"/>
+  <table-filter match-name="Atleten"/>
+  <table-filter match-name="SISResult"/>
+  <table-filter match-name="Uitslagen"/>
+</hibernate-reverse-engineering>
