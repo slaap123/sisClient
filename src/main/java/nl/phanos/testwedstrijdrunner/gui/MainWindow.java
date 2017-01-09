@@ -5,6 +5,9 @@
  */
 package nl.phanos.testwedstrijdrunner.gui;
 
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
+import nl.phanos.testwedstrijdrunner.entity.Sisresult;
 import nl.phanos.testwedstrijdrunner.entity.Wedstrijden;
 
 /**
@@ -15,13 +18,31 @@ public class MainWindow extends javax.swing.JFrame {
 
     public static MainWindow mainObj;
     public Wedstrijden wedstrijd;
-    public boolean test=false;
+    public boolean test=true;
+    
+    
+    public javax.swing.JTextPane jTextPane1 = new JTextPane();
+        
+    private javax.swing.JScrollPane jScrollPane4 = new JScrollPane();
 
     /**
      * Creates new form MainWindow
      */
     public MainWindow() {
         initComponents();
+        jScrollPane4.setViewportView(jTextPane1);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane4)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING)
+        );
+        Sisresult.startHandler();
     }
 
     /**
@@ -79,7 +100,8 @@ public class MainWindow extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainWindow().setVisible(true);
+                mainObj = new MainWindow();
+                mainObj.setVisible(true);
             }
         });
     }

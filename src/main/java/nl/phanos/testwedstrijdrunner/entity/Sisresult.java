@@ -143,6 +143,7 @@ public class Sisresult implements java.io.Serializable {
             try {
                 //System.out.print(buffer + "");
                 System.out.println("found result");
+                System.out.println("\""+buffer+"\"");
                 String lines[] = buffer.split("\r");
                 if (lines[0].contains("Start number")) {
                     Sisresult result = new Sisresult();
@@ -177,6 +178,8 @@ public class Sisresult implements java.io.Serializable {
                         for (Object lane : result.getSislanes()) {
                             savingHandler.uitslagen.add(lane);
                         }
+                        String text = MainWindow.mainObj.jTextPane1.getText();
+                        MainWindow.mainObj.jTextPane1.setText("got sis result" + result.getRaceName()+"_"+result.getHeadN() + "\n" + text);
                     }
                 }
             } catch (Exception e) {
